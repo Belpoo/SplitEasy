@@ -9,7 +9,17 @@ from typing import List, Dict, Any
 from db.redis_client import redis_client
 from calculator.algorithm import optimize_debts
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(title="Debt Calculator Service")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class SplitItem(BaseModel):
     user_id: str
