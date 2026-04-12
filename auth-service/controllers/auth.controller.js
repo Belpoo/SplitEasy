@@ -11,7 +11,7 @@
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const db = require('../../../../../../../../Downloads/Parcial2/Parcial2/auth-service/db');
+const db = require('../db');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'secreto-jwt-backend-split';
 const ACCESS_TOKEN_EXP = '5m'; // 5 minutos, corto por seguridad
