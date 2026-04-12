@@ -1,15 +1,25 @@
-import functions_framework
+try:
+    import functions_framework
+    from flask_cors import cross_origin
+    HAS_FF = True
+except ImportError:
+    HAS_FF = False
+
 from flask import jsonify
-from flask_cors import cross_origin
 import requests
 import os
 
 EXPENSE_API_URL = os.environ.get("EXPENSE_API_URL", "http://localhost:8081")
 DEBT_API_URL = os.environ.get("DEBT_API_URL", "http://localhost:8000")
 
-@functions_framework.http
-@cross_origin()
+def maybe_ff_http(func):
+    if HAS_FF:
+        return functions_framework.http(cross_origin()(func))
+    return func
+
+@maybe_ff_http
 def generate_report(request):
+
     """
     HTTP Cloud Function para generar reportería.
     Agregador Stateless de Expense Service y Debt Calculator.
