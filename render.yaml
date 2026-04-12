@@ -32,7 +32,6 @@ services:
     runtime: static
     buildCommand: cd servicio-front && npm install && npm run build
     staticPublishPath: ./servicio-front/dist
-    plan: free
     headers:
       - path: /*
         name: X-Frame-Options
